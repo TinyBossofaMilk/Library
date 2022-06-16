@@ -1,0 +1,23 @@
+:root
+{
+    --background-dark: rgba(0, 0, 0, 0);
+    --background-white: white;
+
+}
+
+*
+{
+    background-color: var(--background-white)
+}
+
+.card-table
+{
+    display: table;
+    grid-template-areas: repeat(autofill, 75px) 225px;
+}
+
+.card
+{
+    margin: 3px;
+    border: 1px black solid;
+}
