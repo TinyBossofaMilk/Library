@@ -22,6 +22,16 @@ Book.prototype.info = function()
 
 theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
 myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
+myLibrary.push(theHobbit);
 console.log(theHobbit.info());
 
 
@@ -32,15 +42,15 @@ function addBookToLibrary()
     for(const book of myLibrary)
     {
         const card = document.createElement("div");
-        card.className = ".card";
+        card.className = "card";
 
         const title = document.createElement("div");
         title.textContent = book.title;
-        title.className = ".title";
+        title.className = "title";
 
-        const author = document.createElement("div");
+        const author = document.createElement("span");
         author.textContent = book.author;
-        author.className = ".author";
+        author.className = "author";
 
         card.appendChild(title);
         card.appendChild(author);
@@ -50,7 +60,12 @@ function addBookToLibrary()
 }
 
 
-addBookToLibrary();
+function initialize()
+{
+    addBookToLibrary();
+}
+
+initialize();
 
 /*
 If you haven’t already, set up your project with skeleton HTML/CSS and JS files.
@@ -65,7 +80,8 @@ function Book() {
 function addBookToLibrary() {
   // do stuff here
 }
-Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”. 
+Write a function that loops through the array and displays each book on the page. 
+You can display them in some sort of table, or each on their own “card”. 
 It might help for now to manually add a few books to your array so you can see the display.
 
 Add a “NEW BOOK” button that brings up a form allowing users to input the details for the new book: 

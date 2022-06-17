@@ -3,21 +3,79 @@
     --background-dark: rgba(0, 0, 0, 0);
     --background-white: white;
 
+    --book-height: 250px;
+    --book-width: 200px;
+    
 }
 
 *
 {
-    background-color: var(--background-white)
+    background-color: var(--background-white);
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items; */
+    min-height: 100vh;
+}
+
+.menu
+{
+    flex: 1 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu .stats{
+
+}
+
+.menu form{
+    justify-content: flex-end;
+    align-content: flex-end;
 }
 
 .card-table
 {
-    display: table;
-    grid-template-areas: repeat(autofill, 75px) 225px;
+    flex: 3 auto;
+    display: grid;
+    grid-template: var(--book-height) / repeat( auto-fill, var(--book-width));
+    grid-auto-rows: var(--book-height);
+    gap: 10px;
+    
+    padding: 15px;
+    
+    
 }
 
 .card
 {
     margin: 3px;
+    background: rgb(255, 112, 136);
     border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
 }
+
+.card .title
+{
+    /* position: relative; */
+    margin-top: 50px;
+    text-align: center;
+
+}
+
+.card .author
+{
+    text-align: end;
+    padding: 15px;
+}
+
+.card *
+{background-color: inherit;}
