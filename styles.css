@@ -3,9 +3,10 @@
     --background-dark: rgba(0, 0, 0, 0);
     --background-white: white;
 
-    --book-height: 250px;
-    --book-width: 200px;
+    --book-width: 150px;
+    --book-height: calc(var(--book-width)*5/3);
     
+    --section-padding: 15px;
 }
 
 *
@@ -43,11 +44,12 @@ body
 {
     flex: 3 auto;
     display: grid;
-    grid-template: var(--book-height) / repeat( auto-fill, var(--book-width));
+    justify-content: center;
+    grid-template: var(--book-height) / repeat(auto-fill, minmax(var(--book-width), calc(var(--book-width) + 50px)));
     grid-auto-rows: var(--book-height);
     gap: 10px;
     
-    padding: 15px;
+    padding: var(--section-padding);
     
     
 }
@@ -78,4 +80,6 @@ body
 }
 
 .card *
-{background-color: inherit;}
+{
+    background-color: inherit;
+}
