@@ -36,9 +36,21 @@ body
 }
 
 .menu form{
-    justify-content: flex-end;
+    justify-items:flex-end;
     align-content: flex-end;
 }
+
+#addBookForm
+{
+    padding: var(--section-padding);
+    align-items:flex-end;
+}
+
+#addBookForm input
+{
+    margin: 5px;
+}
+
 
 .card-table
 {
@@ -65,6 +77,11 @@ body
     
 }
 
+.card *
+{
+    background-color: inherit;
+}
+
 .card .title
 {
     /* position: relative; */
@@ -79,7 +96,6 @@ body
     padding: 15px;
 }
 
-.card *
-{
-    background-color: inherit;
+.card input{
+    flex
 }

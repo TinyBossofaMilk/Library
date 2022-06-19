@@ -18,12 +18,78 @@ Book.prototype.info = function()
     return `${this.title} by ${this.author}, ${this.pages} pages, ${ this.hasRead ? "read" : "not read yet"}`;
 }
 
+function addButtonEvents()
+{
+    const addBookButton = document.querySelector("#addBookForm button");
+
+    addBookButton.addEventListener(onclick, () =>
+    {
+        addBook();
+        // reinitializecardtable()
+
+    });
+
+}
+
+
+
+
+function addBookButton()
+{
+    addBook();
+    reinitializeCardTable();
+}
+
+
 function addBook()
 {
-    const addBookForm = document.getElementById(addBook);
-    addBookForm.querySelectorAll(input)
+    const addBookForm = document.getElementById("addBookForm");
+    const inputArr = Array.from(addBookForm.querySelectorAll("input"));
 
-    const bookTitle = document.querySelector("#addBook>input")
+    let title;
+    let author;
+    let pages;
+    let hasRead;
+
+    for(let inputElement of inputArr)
+    {
+        switch(inputElement.getAttribute("for"))
+        {
+            case "title": title = inputElement.value;
+            break;
+            
+            case "author":  author = inputElement.value;
+            break;
+            
+            case "pages":  pages = inputElement.value;
+            break;
+            
+            case "hasRead":  hasRead = inputElement.checked;
+            break;
+        }
+    }
+    
+    //add code to find if book already exists in lib
+    myLibrary.push(new Book(title, author, pages, hasRead));
+    
+    for(let inputElement of inputArr)
+    {inputElement.value = "";}
+}
+
+function reinitializeCardTable()
+{
+    console.log("hello");
+
+    const existingCards = document.querySelector(".card-table");
+    
+    while(existingCards.hasChildNodes())
+    {existingCards.removeChild(existingCards.firstChild);}
+
+    //take in filter
+
+    populateTable();
+
+
 }
 
 theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
@@ -58,6 +124,10 @@ function populateTable()
         author.textContent = book.author;
         author.className = "author";
 
+        const hasRead = document.createElement("input");
+        hasRead.type = "checkbox"
+        
+
         card.appendChild(title);
         card.appendChild(author);
 
@@ -69,6 +139,7 @@ function populateTable()
 function initialize()
 {
     populateTable();
+    // addButtonEvents();
 }
 
 initialize();

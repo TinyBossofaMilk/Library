@@ -10,15 +10,11 @@
 <body>
     <div class="menu">
 
-        <div class="filter">
-            <input type="search" for="search" placeholder="Search">
-            <input type="">
-
-        </div>
 
 
-        <form id="addBook">
-            <input type="text" for="name" placeholder="Name">
+
+        <form id="addBookForm">
+            <input type="text" for="title" placeholder="Title">
             <br>
             <input type="text" for="author" placeholder="Author">
             <br>
@@ -30,10 +26,16 @@
             <br>
             <br>
 
-            <button onclick="">Add to Library</button>
+            <button type="button" onclick="addBookButton()">Add to Library</button>
         </form>
     </div>
 
+    <div class="filter">
+        <input type="search" for="search" placeholder="Search">
+        <input type="">
+
+    </div>
+    
     <div class="card-table"></div>
 
     
