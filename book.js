@@ -31,9 +31,6 @@ function addButtonEvents()
 
 }
 
-
-
-
 function addBookButton()
 {
     addBook();
@@ -92,22 +89,6 @@ function reinitializeCardTable()
 
 }
 
-theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-myLibrary.push(theHobbit);
-console.log(theHobbit.info());
-
-
-
 const table = document.querySelector(".card-table");
 function populateTable()
 {
@@ -123,13 +104,21 @@ function populateTable()
         const author = document.createElement("span");
         author.textContent = book.author;
         author.className = "author";
-
-        const hasRead = document.createElement("input");
-        hasRead.type = "checkbox"
         
+        const hasRead = document.createElement("input");
+        hasRead.type = "checkbox";
+        hasRead.className = "hasRead";
+        hasRead.checked = book.hasRead;
+        hasRead.id = book.title;
+
+        hasRead.addEventListener("change", ()=>
+        {
+            book.hasRead = hasRead.checked;
+        });
 
         card.appendChild(title);
         card.appendChild(author);
+        author.appendChild(hasRead);
 
         table.appendChild(card);
     }
@@ -138,9 +127,52 @@ function populateTable()
 
 function initialize()
 {
+    theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
+    myLibrary.push(theHobbit);
+    myLibrary.push(new Book("Twilight", "Stephanie Meyers", 295, false));
+    myLibrary.push(new Book("Harry Potter: Prisoner of Askaban","J.K. Rowling", 300 , false));
+    myLibrary.push(new Book("The Bible", "God", 851, true));
+    myLibrary.push(new Book("The Screwtape Letters", "C.S. Lewis", 51, true));
+    myLibrary.push(new Book("Mere Christianity", "C.S. Lewis", 51, false));
+    myLibrary.push(new Book("Cracking the Coding Interview", "Aal Laackman", 51, false));
+    myLibrary.push(new Book("The Hobbit", "J.R. Tolkien", 51, false));
+    myLibrary.push(new Book("Crime and Punishment", "Doestevsky", 51, false));
+    myLibrary.push(new Book("", "", 51, true));
+    myLibrary.push(new Book("", "", 51, false));
+    myLibrary.push(theHobbit);
+    myLibrary.push(theHobbit);
+    myLibrary.push(theHobbit);
+    myLibrary.push(theHobbit);
+    myLibrary.push(theHobbit);
+    myLibrary.push(theHobbit);
+    myLibrary.push(theHobbit);
+    console.log(theHobbit.info());
+
     populateTable();
     // addButtonEvents();
 }
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+  
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 
 initialize();
 
