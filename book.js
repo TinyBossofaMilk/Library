@@ -1,8 +1,8 @@
 let myLibrary = [];
+let order = "title";
 
 function Book()
-{// name, author, pages, hasRead
-}
+{ /*name, author, pages, hasRead*/}
 
 function Book(title, author, pages, hasRead)
 {
@@ -18,25 +18,11 @@ Book.prototype.info = function()
     return `${this.title} by ${this.author}, ${this.pages} pages, ${ this.hasRead ? "read" : "not read yet"}`;
 }
 
-function addButtonEvents()
-{
-    const addBookButton = document.querySelector("#addBookForm button");
-
-    addBookButton.addEventListener(onclick, () =>
-    {
-        addBook();
-        // reinitializecardtable()
-
-    });
-
-}
-
 function addBookButton()
 {
     addBook();
     reinitializeCardTable();
 }
-
 
 function addBook()
 {
@@ -69,14 +55,75 @@ function addBook()
     //add code to find if book already exists in lib
     myLibrary.push(new Book(title, author, pages, hasRead));
     
-    for(let inputElement of inputArr)
-    {inputElement.value = "";}
+    // for(let inputElement of inputArr)
+    // {inputElement.value = "";}
+}
+
+
+
+////////////////////////////////////////////////
+//limits results by page number, search parameters etc
+function limitResultsby()
+{
+    const search = document.getElementById("searchFilter");
+    const pagesLowerLimit = document.getElementById("pagesLowerLimit");
+    const pagesUpperLimit = document.getElementById("pagesUpperLimit");
+
+    let filteredLibrary = myLibrary;
+
+    // console.log(search.value.length)
+    if(search.value.length)
+    {filteredLibrary = filteredLibrary.filter((book) => {return book.title.includes(search.value) || book.author.includes(search.value);});    }
+
+    if(pagesLowerLimit.value)
+    {filteredLibrary = filteredLibrary.filter((book) => {return pagesLowerLimit.value <= book.pages;});}
+    
+    if(pagesUpperLimit.value)
+    {filteredLibrary = filteredLibrary.filter((book) => {return book.pages <= pagesUpperLimit.value;});}
+
+    return filteredLibrary;
+}
+
+function sortResultsByButton(inputOrder){
+    order = inputOrder;
+    filterResults();
+}
+
+function sortBooksArrayBy(booksArr, order="title")
+{
+    
+}
+
+
+
+function filterResults(myLibrary = myLibrary)
+{
+    let filterResults;
+
+    function orderByTitle()
+    {
+        
+    };
+
+
+    //order results by order.
+    switch(order)
+    {
+        case "title": break;
+
+        case "author": 
+
+        case "pages":
+    }
+
+
+
+
+
 }
 
 function reinitializeCardTable()
 {
-    console.log("hello");
-
     const existingCards = document.querySelector(".card-table");
     
     while(existingCards.hasChildNodes())
@@ -84,15 +131,18 @@ function reinitializeCardTable()
 
     //take in filter
 
+    let displayedResults = filterResults(myLibrary);
+
     populateTable();
 
 
 }
 
-const table = document.querySelector(".card-table");
-function populateTable()
+
+function populateTable(displayResults = myLibrary)
 {
-    for(const book of myLibrary)
+    const table = document.querySelector(".card-table");
+    for(const book of displayResults)
     {
         const card = document.createElement("div");
         card.className = "card";
@@ -111,10 +161,8 @@ function populateTable()
         hasRead.checked = book.hasRead;
         hasRead.id = book.title;
 
-        hasRead.addEventListener("change", ()=>
-        {
-            book.hasRead = hasRead.checked;
-        });
+        hasRead.addEventListener("change", () =>
+        {book.hasRead = hasRead.checked;});
 
         card.appendChild(title);
         card.appendChild(author);
@@ -123,7 +171,6 @@ function populateTable()
         table.appendChild(card);
     }
 }
-
 
 function initialize()
 {
@@ -148,9 +195,18 @@ function initialize()
     myLibrary.push(theHobbit);
     console.log(theHobbit.info());
 
+    //myLibrary.sort()
+
     populateTable();
     // addButtonEvents();
 }
+
+function listResultsButton()
+{
+    document.getElementById("filterDropdown").classList.toggle("show");
+}
+
+
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -203,5 +259,4 @@ One easy solution is giving them a data-attribute that corresponds to the index 
 
 Add a button on each book’s display to change its read status.
 To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance.
-hello
-*/
+hello */

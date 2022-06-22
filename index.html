@@ -34,17 +34,27 @@
     </div>
 
     <div class="filter">
-        <input type="search" for="search" placeholder="Search">
-        <input type="">
+        <input type="search" for="search" placeholder="Search" id="searchFilter" onchange="limitResultsby()">
 
-        <div class="dropdown">
+        <span class="dropdown">
+            Pages from <input type="number" id=pagesLowerLimit onchange="limitResultsby()"> to <input type="number" id=pagesUpperLimit onchange="limitResultsby()">
+            <button onclick="listResultsButton()">Sort results by...</button>
+            <div id="filterDropdown" class="dropdown-content">
+                <div onclick="sortResultsbyButton('title')">Title</div>
+                <div onclick="sortResultsbyButton('author')">Author</div>
+                <div>Pages</div>
+            </div>            
+        </span>
+
+        <!-- <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn">Dropdown</button>
             <div id="myDropdown" class="dropdown-content">
               <a href="#">Link 1</a>
               <a href="#">Link 2</a>
               <a href="#">Link 3</a>
             </div>
-        </div>
+        </div> -->
+
 
     </div>
     

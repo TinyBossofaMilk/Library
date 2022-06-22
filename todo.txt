@@ -1,0 +1,19 @@
+Add implementation to search bar input
+
+link all functions together
+
+Filter results by:
+Search input
+    all trigger reinitialize of table
+
+reinitialize table
+    Eliminate books that don't meet...
+        search text input
+        pages range
+    
+    filter display from above ^ by Order
+        call Order function by...
+            A-Z
+            Author
+            pages
+populate table with the new array.
