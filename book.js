@@ -1,5 +1,6 @@
 let myLibrary = [];
 let order = "title";
+let displayedLibrary = new Array;
 
 function Book()
 { /*name, author, pages, hasRead*/}
@@ -68,12 +69,12 @@ function limitResultsby()
     const search = document.getElementById("searchFilter");
     const pagesLowerLimit = document.getElementById("pagesLowerLimit");
     const pagesUpperLimit = document.getElementById("pagesUpperLimit");
+    //read
 
     let filteredLibrary = myLibrary;
 
-    // console.log(search.value.length)
     if(search.value.length)
-    {filteredLibrary = filteredLibrary.filter((book) => {return book.title.includes(search.value) || book.author.includes(search.value);});    }
+    {filteredLibrary = filteredLibrary.filter((book) => {return book.title.toLowerCase().includes(search.value.toLowerCase()) || book.author.toLowerCase().includes(search.value.toLowerCase());});    }
 
     if(pagesLowerLimit.value)
     {filteredLibrary = filteredLibrary.filter((book) => {return pagesLowerLimit.value <= book.pages;});}
@@ -81,6 +82,7 @@ function limitResultsby()
     if(pagesUpperLimit.value)
     {filteredLibrary = filteredLibrary.filter((book) => {return book.pages <= pagesUpperLimit.value;});}
 
+    // console.log(filteredLibrary);
     return filteredLibrary;
 }
 
@@ -89,9 +91,21 @@ function sortResultsByButton(inputOrder){
     filterResults();
 }
 
-function sortBooksArrayBy(booksArr, order="title")
+function sortBooksArrayBy(booksArr = myLibrary, order = "title")
 {
-    
+    switch(order)
+    {
+        case "title":   booksArr.sort((a, b) => a.title.localeCompare(b.title))
+                        break;
+                        
+        case "author":  booksArr.sort((a, b) => a.author.localeCompare(b.author))
+                        break;
+                        
+        case "pages":   booksArr.sort((a, b) => a.pages > b.author)
+                        break;
+    }
+
+    return booksArr;
 }
 
 
@@ -106,15 +120,6 @@ function filterResults(myLibrary = myLibrary)
     };
 
 
-    //order results by order.
-    switch(order)
-    {
-        case "title": break;
-
-        case "author": 
-
-        case "pages":
-    }
 
 
 
@@ -195,6 +200,7 @@ function initialize()
     myLibrary.push(theHobbit);
     console.log(theHobbit.info());
 
+    sortBooksArrayBy();
     //myLibrary.sort()
 
     populateTable();
