@@ -1,6 +1,6 @@
 let myLibrary = [];
 let order = "title";
-let displayedLibrary = new Array;
+let displayedLibrary = myLibrary;
 
 function Book()
 { /*name, author, pages, hasRead*/}
@@ -64,12 +64,13 @@ function addBook()
 
 ////////////////////////////////////////////////
 //limits results by page number, search parameters etc
+//is called by changing page input, search input
 function limitResultsby()
 {
     const search = document.getElementById("searchFilter");
     const pagesLowerLimit = document.getElementById("pagesLowerLimit");
     const pagesUpperLimit = document.getElementById("pagesUpperLimit");
-    //read
+    //read or not
 
     let filteredLibrary = myLibrary;
 
@@ -83,17 +84,20 @@ function limitResultsby()
     {filteredLibrary = filteredLibrary.filter((book) => {return book.pages <= pagesUpperLimit.value;});}
 
     // console.log(filteredLibrary);
+    displayedLibrary = filteredLibrary;
+
+    reinitializeCardTable(sortBooksArrayBy(filteredLibrary));
     return filteredLibrary;
 }
 
 function sortResultsByButton(inputOrder){
     order = inputOrder;
-    filterResults();
+    reinitializeCardTable(sortBooksArrayBy(displayedLibrary));
 }
 
-function sortBooksArrayBy(booksArr = myLibrary, order = "title")
+function sortBooksArrayBy(booksArr = myLibrary, localOrder = order)
 {
-    switch(order)
+    switch(localOrder)
     {
         case "title":   booksArr.sort((a, b) => a.title.localeCompare(b.title))
                         break;
@@ -103,22 +107,16 @@ function sortBooksArrayBy(booksArr = myLibrary, order = "title")
                         
         case "pages":   booksArr.sort((a, b) => a.pages > b.author)
                         break;
+        
+        case "hasRead": booksArr.sort((a, b) => a.hasRead)
     }
 
     return booksArr;
 }
 
-
-
+//
 function filterResults(myLibrary = myLibrary)
 {
-    let filterResults;
-
-    function orderByTitle()
-    {
-        
-    };
-
 
 
 
@@ -127,20 +125,14 @@ function filterResults(myLibrary = myLibrary)
 
 }
 
-function reinitializeCardTable()
+function reinitializeCardTable(filteredResults = myLibrary)
 {
     const existingCards = document.querySelector(".card-table");
     
     while(existingCards.hasChildNodes())
     {existingCards.removeChild(existingCards.firstChild);}
 
-    //take in filter
-
-    let displayedResults = filterResults(myLibrary);
-
-    populateTable();
-
-
+    populateTable(filteredResults);
 }
 
 
@@ -198,9 +190,10 @@ function initialize()
     myLibrary.push(theHobbit);
     myLibrary.push(theHobbit);
     myLibrary.push(theHobbit);
-    console.log(theHobbit.info());
-
-    sortBooksArrayBy();
+    // console.log(theHobbit.info());
+    
+    myLibrary = sortBooksArrayBy();
+    console.log(myLibrary);
     //myLibrary.sort()
 
     populateTable();
