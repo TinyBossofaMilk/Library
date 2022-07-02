@@ -3,7 +3,7 @@
     --background-dark: rgba(0, 0, 0, 0);
     --background-white: white;
 
-    --book-width: 150px;
+    --book-width: 175px;
     --book-height: calc(var(--book-width)*5/3);
     
     --section-padding: 15px;
@@ -21,12 +21,12 @@ body
     justify-content: space-between;
     /* align-items; */
     min-height: 100vh;
+    padding: 15px
 }
 
 .menu
 {
     flex: 1 0 auto;
-
     display: flex;
     justify-content: space-between;
 }
@@ -51,19 +51,41 @@ body
     margin: 5px;
 }
 
+.filter
+{
+    display: flex;
+    gap: 10px;
+}
+
+.filter input
+{
+
+}
+
+.filter input#searchFilter
+{
+    flex: 1 0 auto;
+}
+
+.filter input[type="number"]
+{
+    max-width: 45px;
+}
+
+.filter>div
+{
+    border: 1px black solid;
+}
 
 .card-table
 {
     flex: 3 auto;
     display: grid;
-    justify-content: center;
-    grid-template: var(--book-height) / repeat(auto-fill, minmax(var(--book-width), calc(var(--book-width) + 50px)));
+    grid-template: var(--book-height) / repeat(auto-fill, minmax(var(--book-width), 1fr));
     grid-auto-rows: var(--book-height);
     gap: 10px;
     
-    padding: var(--section-padding);
-    
-    
+    padding: var(--section-padding) 0;
 }
 
 .card
@@ -74,12 +96,19 @@ body
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+    border-radius: 10px;
+}
+
+.card:hover
+{
+    border: 3px cornflowerblue solid;
 }
 
 .card *
 {
     background-color: inherit;
+    border-radius: inherit;
+
 }
 
 .card .title
@@ -99,4 +128,28 @@ body
 .card input{
     justify-self: flex-end;
     align-self: flex-start;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content
+{
+    /* display: none; */
+    position: absolute;
+
+    height: 0;
+    overflow: hidden;
+    /*-webkit-transition: height 200ms linear;
+    -moz-transition: height 200ms linear;
+    -ms-transition: height 200ms linear;
+    -o-transition: height 200ms linear; */
+    transition: height 150ms linear;
+}
+
+.dropdown:hover .dropdown-content {
+    /* display: block; */
+    height: 3.5em;
 }

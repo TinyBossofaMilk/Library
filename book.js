@@ -62,7 +62,17 @@ function addBook()
 
 
 
-////////////////////////////////////////////////
+///////////////////////////////////////////////////////////FILTER RESULTS FUNCTIONS
+
+function resetFieldsButton()
+{
+    document.getElementById("searchFilter").value = "";
+    document.getElementById("pagesLowerLimit").value = "";
+    document.getElementById("pagesUpperLimit").value = "";
+    // has read
+    //ascending/descending order
+}
+
 //limits results by page number, search parameters etc
 //is called by changing page input, search input
 function limitResultsby()
@@ -99,30 +109,19 @@ function sortBooksArrayBy(booksArr = myLibrary, localOrder = order)
 {
     switch(localOrder)
     {
-        case "title":   booksArr.sort((a, b) => a.title.localeCompare(b.title))
+        case "title":   booksArr.sort((a, b) => a.title.localeCompare(b.title));
                         break;
                         
-        case "author":  booksArr.sort((a, b) => a.author.localeCompare(b.author))
+        case "author":  booksArr.sort((a, b) => a.author.localeCompare(b.author));
                         break;
                         
-        case "pages":   booksArr.sort((a, b) => a.pages > b.author)
+        case "pages":   booksArr.sort((a, b) => a.pages > b.author);
                         break;
         
-        case "hasRead": booksArr.sort((a, b) => a.hasRead)
+        case "hasRead": booksArr.sort((a, b) => a.hasRead);
     }
 
     return booksArr;
-}
-
-//
-function filterResults(myLibrary = myLibrary)
-{
-
-
-
-
-
-
 }
 
 function reinitializeCardTable(filteredResults = myLibrary)
@@ -169,6 +168,8 @@ function populateTable(displayResults = myLibrary)
     }
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////
+
 function initialize()
 {
     theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
@@ -193,16 +194,30 @@ function initialize()
     // console.log(theHobbit.info());
     
     myLibrary = sortBooksArrayBy();
-    console.log(myLibrary);
+    // console.log(myLibrary);
     //myLibrary.sort()
 
     populateTable();
     // addButtonEvents();
 }
 
-function listResultsButton()
+/////////////////////////////////////HOVER and BUTTON FUNCTIONALITY
+
+function hoverDropdownInitialization()
 {
-    document.getElementById("filterDropdown").classList.toggle("show");
+    const filterDropdown = document.getElementById("filter-dropdown")
+    // .classList.toggle("show");
+    // const filterDropdown = classList.toggle("show");
+
+    function addHoverDropdown(dropdownElement)
+    {
+        dropdownElement.addEventListener("hover", () => 
+        {
+            target.classList.toggle("show")
+        });
+    }
+
+    const hasReadDropdown = document.getElementById("read-dropdown").classList.toggle("show");
 }
 
 

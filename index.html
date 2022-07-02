@@ -35,32 +35,29 @@
 
     <div class="filter">
         <input type="search" for="search" placeholder="Search" id="searchFilter" onchange="limitResultsby()">
-
-        <span class="dropdown">
-            Pages from <input type="number" id=pagesLowerLimit onchange="limitResultsby()"> to <input type="number" id=pagesUpperLimit onchange="limitResultsby()">
-            <button onclick="listResultsButton()">Sort results by...</button>
-            <div id="filterDropdown" class="dropdown-content">
-                <div onclick="sortResultsbyButton('title')">Title</div>
-                <div onclick="sortResultsbyButton('author')">Author</div>
-                <div>Pages</div>
-            </div>            
-        </span>
-
-        <!-- <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-            <div id="myDropdown" class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
+        Pages from <input type="number" id=pagesLowerLimit onchange="limitResultsby()"> to <input type="number" id=pagesUpperLimit onchange="limitResultsby()">
+        
+        <div class="dropdown">
+            <span>See...</span>
+            <div id="read-dropdown" class="dropdown-content">
+                <div onclick="limitResultsby()">All</div>
+                <div onclick="limitResultsby()">Read</div>
+                <div onclick="limitResultsby()">Unread</div>
             </div>
-        </div> -->
+        </div>
 
-
+        <div class="dropdown">
+            <div>Sort results by...</div>
+            <div id="filter-dropdown" class="dropdown-content">
+                <div onclick="sortResultsByButton('title')">Title</div>
+                <div onclick="sortResultsByButton('author')">Author</div>
+                <div onclick="sortResultsByButton('pages')">Pages</div>
+            </div>
+        </div>
+        <button onclick="resetFieldsButton()">Reset Fields</button>
     </div>
     
     <div class="card-table"></div>
-
-    
 </body>
 
 <script src="book.js"></script>
